@@ -1,7 +1,6 @@
 package com.example.contacts.contacts.model;
 
-import java.io.Serializable;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,48 +13,42 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
-@Component
-@Table(name = "Contacts")
+@Table(name = "User")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @XmlRootElement
-public class Contact implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@NotBlank
 	private String name;
 	
-	private String address;
+	@NotBlank
+	@Column(name = "psw")
+	private String password;
 	
+	@NotBlank
 	private String email;
-	
-	private String cellphone_number;
 
-	public Contact() {
+	public User() {
 		
 	}
 	
-	public Contact(@NotBlank String name, String address, String email, String cellphone_number) {
+	public User(@NotBlank String name, @NotBlank String password, @NotBlank String email) {
+		super();
 		this.name = name;
-		this.address = address;
+		this.password = password;
 		this.email = email;
-		this.cellphone_number = cellphone_number;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -67,12 +60,12 @@ public class Contact implements Serializable {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -82,12 +75,7 @@ public class Contact implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getCellphone_number() {
-		return cellphone_number;
-	}
-
-	public void setCellphone_number(String cellphone_number) {
-		this.cellphone_number = cellphone_number;
-	}
+	
+	
+	
 }
